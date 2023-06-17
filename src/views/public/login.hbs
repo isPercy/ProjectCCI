@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+  </head>
+  <body>
+
+    <div class="py-10 flex items-center justify-center">
+      <div class="max-w-md w-full space-y-8">
+        
+        <div>
+          <h2 class="text-center text-3xl font-extrabold text-gray-900">Iniciar sesión</h2>
+        </div>
+
+        <form class="mt-8 space-y-6" action="/auth" method="post">
+          {{!-- Labels de relleno de información --}}
+          <div class="rounded-md shadow-sm -space-y-px">
+            <div>
+              <label for="correo" class="sr-only"></label>
+              <input id="correo" name="correo" type="email" autocomplete="correo" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Correo">
+            </div>
+            <div>
+              <label for="password" class="sr-only"></label>
+              <input id="password" name="password" type="password" autocomplete="current-password" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Contraseña">
+            </div>
+          </div>
+          
+          {{!-- Opciones de recuperación y recordar datos --}}
+          <div class="flex items-center justify-between">
+            <div class="flex items-center">
+              <input id="remember_me" name="remember_me" type="checkbox" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
+              <label for="remember_me" class="ml-2 block text-sm text-gray-900">Recordar</label>
+            </div>
+
+            <div class="text-sm">
+              <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">¿Olvidaste tu contraseña?</a>
+            </div>
+          </div>
+
+          {{!-- boton de inicio de sesion --}}
+          <div>
+            <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+              <span class="absolute left-0 inset-y-0 flex items-center pl-3">
+                <svg class="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M9.707 3.293a1 1 0 00-1.414 0L4 8.586V16a2 2 0 002 2h8a2 2 0 002-2V8.586l-4.293-4.293a1 1 0 00-1.414 0z" clip-rule="evenodd" />
+                </svg>
+              </span>
+              Entrar
+            </button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+
+  </body>
+</html>
