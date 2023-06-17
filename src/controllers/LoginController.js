@@ -23,8 +23,6 @@ function auth(req, res) {
       conn.query(query, [email, password],(err, rows) => {
         if(rows.length > 0) {
           console.log(rows);
-          req.session.role = 'ID_Rol'; // O cualquier otro valor que definas según tu lógica de autenticación
-          console.log(req.session.role);
         } else {
           console.log('not');
           res.send('El correo y/o la contraseña no coincide con un usuario existente');
