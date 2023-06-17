@@ -20,9 +20,9 @@ const getSolicitudes = (conn) => {
 // Funcion Eliminar
 const getEliminar = (req, res) => {
     const id = req.params.id;
-    connection.query('DELETE FROM Solicitud WHERE id = ?', id, (error, result) => {
+    connection.query('DELETE FROM Solicitud WHERE ID = ?', id, (error, result) => {
         if (error) throw error;
-        res.redirect('/usuarios');
+        res.redirect('/home');
     });
 };
 

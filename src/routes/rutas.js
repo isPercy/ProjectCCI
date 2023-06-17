@@ -3,6 +3,9 @@ const router = express.Router();
 const { getSolicitudes , getEliminar, getEditar } = require('../controllers/ControllerUsers');
 const { index, auth, logout } = require("../controllers/LoginController");
 
+const { checkRole } = require('../controllers/middleware');
+
+
 
 //Rutas de login
 router.get('/index', index);
