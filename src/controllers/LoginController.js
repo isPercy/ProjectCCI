@@ -32,7 +32,6 @@ function auth(req, res) {
     });
   } catch (error) {
     console.error('Error al ejecutar la consulta:', error);
-    //Manejar el error, enviar una respuesta de error al cliente, etc.
   }
 }
 

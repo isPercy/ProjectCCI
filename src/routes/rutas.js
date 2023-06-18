@@ -42,7 +42,7 @@ router.get('/logout', logout);
   //  RUTA DE FormularioEditar
   router.get('/FormularioEditar', (req, res) => {
     res.render('public/FormularioEditar', { 
-      layout: 'layouts/navbar',
+      layout: 'layouts/navbar2',
       activeServices: true
     });
   });
@@ -50,7 +50,7 @@ router.get('/logout', logout);
   //  RUTA DE --------------------------
   router.get('/about', (req, res) => {
     res.render('public/about', { 
-      layout: 'layouts/navbar', 
+      layout: 'layouts/navbar2', 
       activeAbout: true
     });
   });
@@ -58,7 +58,7 @@ router.get('/logout', logout);
   //  RUTA DE --------------------------
   router.get('/contact', (req, res) => {
     res.render('public/contact', { 
-      layout: 'layouts/navbar',
+      layout: 'layouts/navbar2',
       activeContact: true
     });
   });
@@ -66,7 +66,7 @@ router.get('/logout', logout);
   //  RUTA DE nueva-solicitud
   router.get('/nueva-solicitud', (req, res) => {
     res.render('public/nueva-solicitud', { 
-      layout: 'layouts/navbar'
+      layout: 'layouts/navbar2'
     });
   });
 
@@ -75,7 +75,7 @@ router.get('/logout', logout);
     try {
       const usuarios = await getSolicitudes(req.app.locals.connection);
       res.render('public/solicitudes', {
-        layout: 'layouts/navbar', 
+        layout: 'layouts/navbar2', 
         activeUser: true,
         usuarios: usuarios,
       });
