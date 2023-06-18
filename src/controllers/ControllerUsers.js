@@ -1,6 +1,4 @@
 // Importar la función connection
-const express = require('express');
-const app = express();
 const { connection } = require('../conn');
 
 //  Query para traer solicitud
@@ -46,14 +44,16 @@ const getVistaEditar = (req, res) => {
     catch (error) {
         console.error('Error al ejecutar la consulta:', error);
     }
-
     // connection.query('UPDATE usuario_universidad SET ? WHERE id = ?', [datosActualizados, id], (error, result) => {
     //     if (error) throw error;
     //     res.send('/solicitudes');
     // });
 };
 
+//funtion for load data in table in view FormularioEditar.hbs
+
+
 
 module.exports = {
-    getSolicitudes, getEliminar , getVistaEditar
+    getSolicitudes, getVistaEditar, getEliminar 
 };
