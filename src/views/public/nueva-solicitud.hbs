@@ -1,0 +1,33 @@
+<div class="container p-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="col-span-1">
+            <div class="bg-white shadow-md p-4">
+                <form action="/public/register" method="POST">
+                    <div class="mb-4">
+                        <input type="text" class="border border-gray-300 px-4 py-2 w-full" name="rea" placeholder="{{this.Nombre}}" readonly>
+                    </div>
+                    <div class="mb-4">
+                        <input type="text" name="RUN" class="border border-gray-300 px-4 py-2 w-full" placeholder="{{this.Run}}" readonly>
+                    </div>
+                    <div class="mb-4">
+                        <input type="text" name="organizacion" class="border border-gray-300 px-4 py-2 w-full" placeholder="Organizacion">
+                    </div>
+                    <div class="mb-4">
+                        <input type="text" name="representante" class="border border-gray-300 px-4 py-2 w-full" placeholder="Nombre de Representante">
+                    </div>
+                    <div class="mb-4">
+                        <input type="text" name="CorreoCliente" class="border border-gray-300 px-4 py-2 w-full" placeholder="Correo Cliente">
+                    </div>
+                    <div class="mb-4">
+                        <textarea name="descripcion" rows="2" class="border border-gray-300 px-4 py-2 w-full" placeholder="Descripcion de su Proyecto"></textarea>
+                    </div>
+                    <div class="mb-4">
+                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                            Guardar Solicitud
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

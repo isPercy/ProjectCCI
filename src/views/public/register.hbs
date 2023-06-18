@@ -1,3 +1,32 @@
-<div class="text-black-400 text-xl">
-    <h1>register</h1>
+<div class="container p-4">
+    <div class="flex justify-center">
+        <div class="w-full md:w-1/2 lg:w-1/3">
+            <div class="text-center rounded-lg">
+                <div class="py-4 px-6 bg-gray-200">
+                    <h4 class="text-center text-3xl font-extrabold text-gray-900">Registro de usuario</h4>
+                </div>
+                <div class="p-4">
+                    <form action="/signup" method="POST">
+                        <div class="">
+                            <input type="text" name="Nombre Apellido" placeholder="Nombre y Apellido" class="border border-gray-300 px-4 py-2 w-full" autofocus>
+                        </div>
+                        <div class="">
+                            <input type="text" name="Run" placeholder="RUN" class="border border-gray-300 px-4 py-2 w-full" autofocus>
+                        </div>
+                        <div class="">
+                            <input type="text" name="CorreoElectronico" placeholder="Correo Electrónico" class="border border-gray-300 px-4 py-2 w-full">
+                        </div>
+                        <div class="">
+                            <input type="password" name="Contrasenia" placeholder="Contraseña" class="border border-gray-300 px-4 py-2 w-full">
+                        </div>
+                        <div class="mt-4">
+                            <button class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                Regístrate
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

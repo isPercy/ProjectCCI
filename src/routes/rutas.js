@@ -38,7 +38,8 @@ router.get('/logout', logout);
 
 
 //#region Rutas de control admin
-  //  Controlador para la ruta Servicios
+
+  //  RUTA DE FormularioEditar
   router.get('/FormularioEditar', (req, res) => {
     res.render('public/FormularioEditar', { 
       layout: 'layouts/navbar',
@@ -46,7 +47,7 @@ router.get('/logout', logout);
     });
   });
 
-  //  Controlador para la ruta Sobre nosotros
+  //  RUTA DE --------------------------
   router.get('/about', (req, res) => {
     res.render('public/about', { 
       layout: 'layouts/navbar', 
@@ -54,7 +55,7 @@ router.get('/logout', logout);
     });
   });
 
-  //  Controlador para la ruta Contacto
+  //  RUTA DE --------------------------
   router.get('/contact', (req, res) => {
     res.render('public/contact', { 
       layout: 'layouts/navbar',
@@ -62,7 +63,14 @@ router.get('/logout', logout);
     });
   });
 
-  //  Controlador para la ruta Usuarios
+  //  RUTA DE nueva-solicitud
+  router.get('/nueva-solicitud', (req, res) => {
+    res.render('public/nueva-solicitud', { 
+      layout: 'layouts/navbar'
+    });
+  });
+
+  //  RUTA DE solicitudes
   router.get('/solicitudes', async (req, res) => {
     try {
       const usuarios = await getSolicitudes(req.app.locals.connection);
@@ -82,6 +90,7 @@ router.get('/logout', logout);
 
   // Controlador para la ruta editar
   router.get('/editar/:id' , getVistaEditar)
+  
 //#endregion
 
 module.exports = router;
