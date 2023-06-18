@@ -12,7 +12,7 @@ app.use(myconnection(mysql, {
    password: '',
    port: 3306,
    database: 'team_z'
-  }, 'single'));
+}, 'single'));
 
 app.use(session({
 	secret: 'secret',
@@ -27,7 +27,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //  Iniciar el servidor
 const port = 4000;
 app.listen(port, () => {
-   console.log(`Servidor iniciado en el puerto ${port}`);
+   console.log(`Servidor iniciado http://localhost:${port}`);
 });
 
 //  Configura el motor de plantillas HBS

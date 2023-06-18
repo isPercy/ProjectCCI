@@ -21,12 +21,14 @@ router.get('/logout', logout);
       activeHome: true
     });
   });
+
   //  Controlador para la ruta Login
   router.get('/login', (req, res) => {
     res.render('public/login', { 
       layout: 'layouts/navbar',
     });
   });
+
   //  Controlador para la ruta Register
   router.get('/register', (req, res) => {
     res.render('public/register', { 
@@ -36,6 +38,7 @@ router.get('/logout', logout);
 
 //#endregion
 
+//------------------------------------
 
 //#region Rutas de control admin
 
@@ -47,7 +50,7 @@ router.get('/logout', logout);
     });
   });
 
-  //  RUTA DE --------------------------
+  //  RUTA DE ##########################
   router.get('/about', (req, res) => {
     res.render('public/about', { 
       layout: 'layouts/navbar2', 
@@ -55,7 +58,7 @@ router.get('/logout', logout);
     });
   });
 
-  //  RUTA DE --------------------------
+  //  RUTA DE ##########################
   router.get('/contact', (req, res) => {
     res.render('public/contact', { 
       layout: 'layouts/navbar2',
@@ -87,7 +90,6 @@ router.get('/logout', logout);
 
   // Controlador para la ruta eliminar
   router.get('/eliminar/:id' , getEliminar)
-
   // Controlador para la ruta editar
   router.get('/editar/:id' , getVistaEditar)
   
