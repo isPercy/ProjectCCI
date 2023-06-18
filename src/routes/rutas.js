@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getSolicitudes , getEliminar, getEditar } = require('../controllers/ControllerUsers');
+const { getSolicitudes , getEliminar, getVistaEditar } = require('../controllers/ControllerUsers');
 const { index, auth, logout } = require("../controllers/LoginController");
 
 // const { checkRole } = require('../controllers/middleware');
@@ -81,7 +81,7 @@ router.get('/logout', logout);
   router.get('/eliminar/:id' , getEliminar)
 
   // Controlador para la ruta editar
-  router.get('/editar/' , getEditar)
+  router.get('/editar/:id' , getVistaEditar)
 //#endregion
 
 module.exports = router;

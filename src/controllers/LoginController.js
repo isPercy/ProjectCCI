@@ -1,4 +1,4 @@
-const { render } = require('ejs');
+// const { render } = require('ejs');
 
 // index page
 function index(req, res) {
@@ -23,8 +23,9 @@ function auth(req, res) {
       conn.query(query, [email, password],(err, rows) => {
         if(rows.length > 0) {
           console.log(rows);
+          res.redirect('/solicitudes');
         } else {
-          console.log('not');
+          console.log('Cuenta no encontrada');
           res.send('El correo y/o la contraseña no coincide con un usuario existente');
         }
       });

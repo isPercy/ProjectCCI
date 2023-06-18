@@ -27,16 +27,33 @@ const getEliminar = (req, res) => {
 };
 
 // Funcion Editar
-const getEditar = (req, res) => {
-    // const id = req.params.id;
-    // const datosActualizados = req.body;
+const getVistaEditar = (req, res) => {
+    const id = req.params.id;
+    const query = 'SELECT * FROM solicitud WHERE ID = ?';
+    try {
+        req.getConnection((err, conn) => {
+            conn.query(query, [id],(err, rows) => {
+                if(rows.length > 0) {
+                    console.log(rows);
+                    res.redirect('/FormularioEditar');
+                } else {
+                    console.log('Usuario no encontrado');
+                    res.send('usuario no existente');
+                }
+            });
+        });
+    } 
+    catch (error) {
+        console.error('Error al ejecutar la consulta:', error);
+    }
+
     // connection.query('UPDATE usuario_universidad SET ? WHERE id = ?', [datosActualizados, id], (error, result) => {
     //     if (error) throw error;
-    //     res.send('');
+    //     res.send('/solicitudes');
     // });
 };
 
 
 module.exports = {
-    getSolicitudes, getEliminar , getEditar
+    getSolicitudes, getEliminar , getVistaEditar
 };
