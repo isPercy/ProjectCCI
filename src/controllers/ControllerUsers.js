@@ -34,13 +34,17 @@ const getVistaEditar = (req, res) => {
                 if(rows.length > 0) {
                     console.log(rows);
                     res.redirect('/FormularioEditar');
+
+                    
+
+
                 } else {
                     console.log('Usuario no encontrado');
                     res.send('usuario no existente');
                 }
             });
         });
-    } 
+    }
     catch (error) {
         console.error('Error al ejecutar la consulta:', error);
     }
@@ -49,10 +53,6 @@ const getVistaEditar = (req, res) => {
     //     res.send('/solicitudes');
     // });
 };
-
-//funtion for load data in table in view FormularioEditar.hbs
-
-
 
 module.exports = {
     getSolicitudes, getVistaEditar, getEliminar 

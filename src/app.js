@@ -14,8 +14,9 @@ app.use(myconnection(mysql, {
    database: 'team_z'
 }, 'single'));
 
+// configuracion de session
 app.use(session({
-	secret: 'secret',
+	secret: 'secret-string-cci',
 	resave: true,
 	saveUninitialized: true
 }));

@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { getSolicitudes , getEliminar, getVistaEditar } = require('../controllers/ControllerUsers');
-const { index, auth, logout } = require("../controllers/LoginController");
+const { index, auth, logout, guardarNuevoUsuario } = require("../controllers/LoginController");
 
 // const { checkRole } = require('../controllers/middleware');
 
@@ -11,7 +11,7 @@ const { index, auth, logout } = require("../controllers/LoginController");
 router.get('/index', index);
 router.post('/auth', auth);
 router.get('/logout', logout);
-
+router.post('/RegisterUser', guardarNuevoUsuario);
 //#region Inicio sin logear
 
   // Controlador para la ruta raíz
@@ -61,6 +61,14 @@ router.get('/logout', logout);
   //  RUTA DE ##########################
   router.get('/contact', (req, res) => {
     res.render('public/contact', { 
+      layout: 'layouts/navbar2', 
+      activeAbout: true
+    });
+  });
+
+  //  RUTA DE usuarios
+  router.get('/usuarios', (req, res) => {
+    res.render('public/usuarios', { 
       layout: 'layouts/navbar2',
       activeContact: true
     });
