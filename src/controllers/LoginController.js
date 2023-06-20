@@ -39,7 +39,9 @@ function auth(req, res) {
     req.getConnection((err, conn) => {
       conn.query(query, [email, password], (err, user) => {
         if (user.length > 0) {
-          // ...
+          req.session.loggedin = true;
+          req.session.user = user[0];
+          console.log(req.session.loggedin);
           res.redirect('/usuarios');
         } else {
           // ...

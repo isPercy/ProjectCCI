@@ -18,13 +18,18 @@ const getSolicitudes = (conn) => {
 const DeleteSolicitud = (req, res) => {
     const id = req.params.id;
     connection.query('DELETE FROM Solicitud WHERE ID = ?', id, (error, result) => {
-        if (error) throw error;
-        res.redirect('/solicitudes');
-        res.send('Solicitud fallida');
+        if (error) { 
+            res.redirect('/solicitudes');
+            res.send('Solicitud fallida');
+        }
+            
+        else { 
+            res.redirect('/solicitudes');
+        }
     });
 };
 
-const EditSolicitudes = (req, res) => {
+const EditSolicitud = (req, res) => {
     const id = req.params.id;
     connection.query('SELECT * FROM Solicitud WHERE ID = ?', id, (error, result) => {
         if (error){
@@ -38,5 +43,5 @@ const EditSolicitudes = (req, res) => {
 };
 
 module.exports = {
-    getSolicitudes, DeleteSolicitud, EditSolicitudes
+    getSolicitudes, DeleteSolicitud, EditSolicitud
 };

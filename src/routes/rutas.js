@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { index, auth, logout, guardarNuevoUsuario } = require("../controllers/LoginController");
-const { getSolicitudes, DeleteSolicitud, EditSolicitudes } = require('../controllers/SolicitudesController');
+const { getSolicitudes, DeleteSolicitud, EditSolicitud } = require('../controllers/SolicitudesController');
 const { getUsuarios, DeleteUsuario, EditUsuarios } = require('../controllers/UsersListController');
 
 // const { checkRole } = require('../controllers/middleware');
@@ -91,15 +91,14 @@ router.get('/', (req, res) => {
   });
 
   // Controlador para eliminar solicitud
-  router.get('/EliminarSolicitud/:id' , DeleteSolicitud)
+  router.get('/EliminarSolicitud/:id' , DeleteSolicitud);
   // Controlador para editar solicitud
-  router.get('/EditarSolicitud/:id' , EditSolicitudes)
+  router.get('/EditarSolicitud/:id' , EditSolicitud);
 
   // Controlador para eliminar usuario
-  router.get('/EliminarUsuario/:id', DeleteUsuario)
+  router.get('/EliminarUsuario/:id', DeleteUsuario);
   // Controlador para editar usuario
-  router.get('/EditarUsuario/:id', guardarNuevoUsuario)
-
+  router.get('/EditarUsuario/:id', guardarNuevoUsuario);
 
 //#endregion
 

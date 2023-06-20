@@ -7,7 +7,7 @@
                         <p class="font-medium text-lg">Editar</p>
                         <p>Editar Usuarios</p>
                     </div>
-                    
+                    {{#each usuarioE}}
                     <div class="md:col-span-3">
                         <label for="address">Nombre</label>
                         <input type="text" name="address" id="address" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" placeholder="" />
@@ -43,13 +43,12 @@
 
                             <div class="md:col-span-5 text-right">
                                 <div class="inline-flex items-end">
-                                    {{!-- <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Realizar Cambios</button> --}}
-                                    <a href="/editar/{{this.ID}}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Realizar Cambios</a>
+                                    <a href="/SaveEdit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Realizar Cambios</a>
                                 </div>
                             </div>
-                            
                         </div>
                     </div>
+                    {{/each}}
                 </div>
             </div>
         </div>
