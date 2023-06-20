@@ -9,7 +9,7 @@ function checkRole(roles) {
         }
     };
 }
-  
+
 // Ruta protegida por rol
 app.get('/admin', checkRole(['administrador']), (req, res) => {
     // Lógica de la ruta para el rol de administrador

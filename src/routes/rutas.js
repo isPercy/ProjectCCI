@@ -2,28 +2,27 @@ const express = require('express');
 const router = express.Router();
 const { index, auth, logout, guardarNuevoUsuario } = require("../controllers/LoginController");
 const { getSolicitudes, DeleteSolicitud, EditSolicitudes } = require('../controllers/SolicitudesController');
-const { getUsuarios, DeleteUsuario } = require('../controllers/UsersListController');
+const { getUsuarios, DeleteUsuario, EditUsuarios } = require('../controllers/UsersListController');
 
 // const { checkRole } = require('../controllers/middleware');
 
 // Controlador para la ruta raíz
 router.get('/', (req, res) => {
-  res.render('/home', {
-    layout: 'layouts/navbar',
-    activeHome: true
+  res.render('home', {
+    layout: 'layouts/navbar'
   });
 });
 
 //Rutas de login
   router.get('/login', (req, res) => {
     res.render('login/login', {
-      layout: 'layouts/navbar',
+      layout: 'layouts/navbar'
     });
   });
 
   router.get('/register', (req, res) => {
     res.render('login/register', {
-      layout: 'layouts/navbar',
+      layout: 'layouts/navbar'
     });
   });
 
@@ -38,33 +37,36 @@ router.get('/', (req, res) => {
   //  RUTA DE FormularioEditar
   router.get('/FormularioEditar', (req, res) => {
     res.render('public/FormularioEditar', { 
-      layout: 'layouts/navbar2',
-      activeServices: true
+      layout: 'layouts/navbar2'
     });
   });
 
   //  RUTA DE ##########################
   router.get('/about', (req, res) => {
     res.render('public/about', { 
-      layout: 'layouts/navbar2', 
-      activeAbout: true
+      layout: 'layouts/navbar2'
     });
   });
 
   //  RUTA DE ##########################
   router.get('/contact', (req, res) => {
     res.render('public/contact', { 
-      layout: 'layouts/navbar2', 
-      activeAbout: true
+      layout: 'layouts/navbar2'
     });
   });
 
-  //  RUTA DE usuarios
-  router.get('/usuarios', (req, res) => {
-    res.render('public/usuarios', { 
-      layout: 'layouts/navbar2',
-      activeContact: true
-    });
+  //  RUTA DE VER usuarios
+  router.get('/usuarios',  async (req, res) => {
+    try {
+      const usuarios = await getUsuarios(req.app.locals.connection);
+      res.render('public/usuarios', {
+        layout: 'layouts/navbar2',
+        usuarios: usuarios
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Error obteniendo usuarios');
+    }
   });
 
   //  RUTA DE nueva-solicitud
@@ -74,26 +76,31 @@ router.get('/', (req, res) => {
     });
   });
 
-  //  RUTA DE solicitudes
+  //  RUTA DE VERS solicitudes
   router.get('/solicitudes', async (req, res) => {
     try {
-      const usuarios = await getSolicitudes(req.app.locals.connection);
+      const solicitudes = await getSolicitudes(req.app.locals.connection);
       res.render('public/solicitudes', {
-        layout: 'layouts/navbar2', 
-        activeUser: true,
-        usuarios: usuarios,
+        layout: 'layouts/navbar2',
+        solicitudes: solicitudes
       });
     } catch (error) {
       console.error(error);
-      res.status(500).send('Error obteniendo usuarios');
+      res.status(500).send('Error obteniendo solicitudes');
     }
   });
 
-  // Controlador para la ruta eliminar
+  // Controlador para eliminar solicitud
   router.get('/EliminarSolicitud/:id' , DeleteSolicitud)
-  // Controlador para la ruta editar
+  // Controlador para editar solicitud
   router.get('/EditarSolicitud/:id' , EditSolicitudes)
-  
+
+  // Controlador para eliminar usuario
+  router.get('/EliminarUsuario/:id', DeleteUsuario)
+  // Controlador para editar usuario
+  router.get('/EditarUsuario/:id', guardarNuevoUsuario)
+
+
 //#endregion
 
 module.exports = router;

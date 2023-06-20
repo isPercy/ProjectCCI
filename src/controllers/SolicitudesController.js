@@ -1,4 +1,3 @@
-// Importar la función connection
 const { connection } = require('../conn');
 
 //  Controlador traer solicitud
@@ -20,7 +19,8 @@ const DeleteSolicitud = (req, res) => {
     const id = req.params.id;
     connection.query('DELETE FROM Solicitud WHERE ID = ?', id, (error, result) => {
         if (error) throw error;
-        res.redirect('/home');
+        res.redirect('/solicitudes');
+        res.send('Solicitud fallida');
     });
 };
 
