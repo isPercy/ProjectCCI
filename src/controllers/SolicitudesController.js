@@ -18,11 +18,9 @@ const getSolicitudes = (conn) => {
 const DeleteSolicitud = (req, res) => {
     const id = req.params.id;
     connection.query('DELETE FROM Solicitud WHERE ID = ?', id, (error, result) => {
-        if (error) { 
-            res.redirect('/solicitudes');
+        if (error) {
             res.send('Solicitud fallida');
         }
-            
         else { 
             res.redirect('/solicitudes');
         }
@@ -33,8 +31,7 @@ const EditSolicitud = (req, res) => {
     const id = req.params.id;
     connection.query('SELECT * FROM Solicitud WHERE ID = ?', id, (error, result) => {
         if (error){
-        res.send('error al cargar la vista de editar solicitud');
-        res.redirect('/solicitudes');
+            res.send('error al cargar la vista de editar solicitud');
         }
         else {
             console.log(result);

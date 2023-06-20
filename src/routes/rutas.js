@@ -36,8 +36,13 @@ router.get('/', (req, res) => {
 
   //  RUTA DE FormularioEditar
   router.get('/FormularioEditar', (req, res) => {
-    res.render('public/FormularioEditar', { 
-      layout: 'layouts/navbar2'
+    // const usuario = EditUsuarios(req.app.locals.connection);
+    res.render('public/FormularioEditar', {
+      layout: 'layouts/navbar2',
+      // nombre : usuario.Nombre,
+      // rut: usuario.Rut,
+      // correo : usuario.Correo,
+      // rol : usuario.ID_Rol
     });
   });
 
@@ -76,6 +81,8 @@ router.get('/', (req, res) => {
     });
   });
 
+
+  
   //  RUTA DE VERS solicitudes
   router.get('/solicitudes', async (req, res) => {
     try {
@@ -98,7 +105,7 @@ router.get('/', (req, res) => {
   // Controlador para eliminar usuario
   router.get('/EliminarUsuario/:id', DeleteUsuario);
   // Controlador para editar usuario
-  router.get('/EditarUsuario/:id', guardarNuevoUsuario);
+  router.get('/EditarUsuario/:id', EditUsuarios);
 
 //#endregion
 
