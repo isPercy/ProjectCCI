@@ -1,41 +1,34 @@
 const express = require('express');
 const router = express.Router();
-const { getSolicitudes , getEliminar, getVistaEditar } = require('../controllers/ControllerUsers');
 const { index, auth, logout, guardarNuevoUsuario } = require("../controllers/LoginController");
+const { getSolicitudes, DeleteSolicitud, EditSolicitudes } = require('../controllers/SolicitudesController');
+const { getUsuarios, DeleteUsuario } = require('../controllers/UsersListController');
 
 // const { checkRole } = require('../controllers/middleware');
 
-
+// Controlador para la ruta raíz
+router.get('/', (req, res) => {
+  res.render('/home', {
+    layout: 'layouts/navbar',
+    activeHome: true
+  });
+});
 
 //Rutas de login
-router.get('/index', index);
-router.post('/auth', auth);
-router.get('/logout', logout);
-router.post('/RegisterUser', guardarNuevoUsuario);
-//#region Inicio sin logear
-
-  // Controlador para la ruta raíz
-  router.get('/', (req, res) => {
-    res.render('home', {
-      layout: 'layouts/navbar',
-      activeHome: true
-    });
-  });
-
-  //  Controlador para la ruta Login
   router.get('/login', (req, res) => {
-    res.render('public/login', { 
+    res.render('login/login', {
       layout: 'layouts/navbar',
     });
   });
 
-  //  Controlador para la ruta Register
   router.get('/register', (req, res) => {
-    res.render('public/register', { 
+    res.render('login/register', {
       layout: 'layouts/navbar',
     });
   });
 
+  router.post('/auth', auth);
+  router.post('/RegisterUser', guardarNuevoUsuario);
 //#endregion
 
 //------------------------------------
@@ -97,9 +90,9 @@ router.post('/RegisterUser', guardarNuevoUsuario);
   });
 
   // Controlador para la ruta eliminar
-  router.get('/eliminar/:id' , getEliminar)
+  router.get('/EliminarSolicitud/:id' , DeleteSolicitud)
   // Controlador para la ruta editar
-  router.get('/editar/:id' , getVistaEditar)
+  router.get('/EditarSolicitud/:id' , EditSolicitudes)
   
 //#endregion
 

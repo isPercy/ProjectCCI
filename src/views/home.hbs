@@ -1,3 +1,13 @@
 <div class="text-black-400 text-xl">
     <h1>Hola mundo!</h1>
 </div>
+<!-- ... -->
+{{#if session.loggedin}}
+  <a href="/usuarios">Usuarios</a>
+  <!-- También puedes incluir un enlace para cerrar sesión -->
+  <a href="/logout">Cerrar sesión</a>
+{{else}}
+  <!-- Aquí van los enlaces a las páginas de login y registro -->
+  <h1>Para ver el contenido inicia sesión</h1>
+{{/if}}
+<!-- ... -->

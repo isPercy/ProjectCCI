@@ -1,12 +1,3 @@
-// index page
-function index(req, res) {
-  if (req.session.loggedin != true) {
-    res.redirect('/');
-  } else {
-    res.render('/contact');
-  }
-}
-
 // Controlador para guardar un registro de usuario nuevo
 function guardarNuevoUsuario (req, res) {
   //#region variables
@@ -16,9 +7,8 @@ function guardarNuevoUsuario (req, res) {
   const correo = req.body.correo;
   const rol = 5;
   //#endregion
-  const query = 'INSERT INTO usuariouniversidad (Rut, Nombre, Contrasenia, Correo, ID_Rol) VALUES (?, ?, ?, ?, ?);';
+  const query = 'INSERT INTO usuariouniversidad (Rut, Nombre, Contrasenia, Correo, ID_Rol) VALUES (?, ?, ?, ?, ?)';
   try{
-    
     req.getConnection((err, conn) => {
       conn.query(query, [rut, nombre, contraseña, correo, rol],(err, rows) => {
       if (err) {
@@ -47,24 +37,23 @@ function auth(req, res) {
   const query = 'SELECT * FROM usuariouniversidad WHERE Correo = ? AND Contrasenia = ?';
   try {
     req.getConnection((err, conn) => {
-      conn.query(query, [email, password],(err, user) => {
-        if(user.length > 0) {
-          console.log(user);
-          req.session.loggedin = true;
-          req.session.rol = user[0].ID_Rol;
-          console.log(req.session.rol);
-          console.log(req.session.loggedin);
+      conn.query(query, [email, password], (err, user) => {
+        if (user.length > 0) {
+          // ...
           res.redirect('/usuarios');
         } else {
-          console.log('Cuenta no encontrada');
-          res.send('El correo y/o la contraseña no coincide con un usuario existente');
+          // ...
+          res.render('login/login', {
+            layout: 'layouts/navbar',
+            error: 'El correo y/o la contraseña no coincide con un usuario existente',
+          });
         }
       });
     });
   } catch (error) {
-    console.error('Error al ejecutar la consulta:', error);
+    // ...
   }
-}
+};
 
 //Funcion para cerrar sesion (destuir sesion)
 function logout(req, res) {
@@ -74,9 +63,17 @@ function logout(req, res) {
   res.redirect('/');
 }
 
+// Controlador de la página de inicio (index)
+function index(req, res) {
+  res.render('home', {
+    layout: 'layouts/navbar',
+    activeHome: true,
+  });
+}
+
 module.exports = {
   index: index,
   auth: auth,
   logout: logout,
   guardarNuevoUsuario: guardarNuevoUsuario,
-}
+};
