@@ -19,8 +19,7 @@ const DeleteUsuario = (req, res) => {
     const id = req.params.id;
     connection.query('DELETE FROM usuariouniversidad WHERE ID = ?', id, (error, result) => {
         if (error) { 
-            res.redirect('/usuarios');
-            res.send('Solicitud fallida');
+            res.send('Solicitud de "eliminar" fallida');
         }
         else { 
             res.redirect('/usuarios');
@@ -32,7 +31,7 @@ const EditUsuarios = (req, res) => {
     const id = req.params.id;
     connection.query('SELECT * FROM usuariouniversidad WHERE ID = ?', id, (error, result) => {
         if (error) {
-            res.send('error al cargar la vista de editar solicitud');
+            res.send('Error al cargar datos de usuarios');
         }
         else {
             console.log(result);
@@ -42,7 +41,7 @@ const EditUsuarios = (req, res) => {
                 Rut: result[0].Rut,
                 Correo: result[0].Correo,
                 ID_Roll: result[0].ID_Roll,
-              });
+            });
         }
     });
 };

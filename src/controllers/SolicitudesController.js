@@ -17,7 +17,7 @@ const getSolicitudes = (conn) => {
 // Funcion Eliminar
 const DeleteSolicitud = (req, res) => {
     const id = req.params.id;
-    connection.query('DELETE FROM Solicitud WHERE ID = ?', id, (error, result) => {
+    connection.query('DELETE FROM solicitud WHERE ID = ?', id, (error, result) => {
         if (error) {
             res.send('Solicitud fallida');
         }

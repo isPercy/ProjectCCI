@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { index, auth, logout, guardarNuevoUsuario } = require("../controllers/LoginController");
+const { auth, logout, guardarNuevoUsuario } = require("../controllers/LoginController");
 const { getSolicitudes, DeleteSolicitud, EditSolicitud } = require('../controllers/SolicitudesController');
 const { getUsuarios, DeleteUsuario, EditUsuarios } = require('../controllers/UsersListController');
 
@@ -39,10 +39,6 @@ router.get('/', (req, res) => {
     // const usuario = EditUsuarios(req.app.locals.connection);
     res.render('public/FormularioEditar', {
       layout: 'layouts/navbar2',
-      // nombre : usuario.Nombre,
-      // rut: usuario.Rut,
-      // correo : usuario.Correo,
-      // rol : usuario.ID_Rol
     });
   });
 
@@ -106,6 +102,9 @@ router.get('/', (req, res) => {
   router.get('/EliminarUsuario/:id', DeleteUsuario);
   // Controlador para editar usuario
   router.get('/EditarUsuario/:id', EditUsuarios);
+
+
+  router.get('/logout', logout);
 
 //#endregion
 

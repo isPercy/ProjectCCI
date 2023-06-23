@@ -6,6 +6,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const path = require('path');
 
+// definicion de conexión a la base de datos
 app.use(myconnection(mysql, {
    host: 'localhost',
    user: 'root',
@@ -17,9 +18,15 @@ app.use(myconnection(mysql, {
 // configuracion de session
 app.use(session({
 	secret: 'secret-string-cci',
-	resave: true,
-	saveUninitialized: true
+	resave: false,
+	saveUninitialized: false
 }));
+
+//middleware
+app.use((req, res, next) => {
+   res.locals.user = req.session.user;
+   next();
+});
 
 // Configuracion de Body-Parser 
 app.use(bodyParser.json());

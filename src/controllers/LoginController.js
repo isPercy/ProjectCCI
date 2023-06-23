@@ -44,7 +44,6 @@ function auth(req, res) {
           console.log(req.session.loggedin);
           res.redirect('/usuarios');
         } else {
-          // ...
           res.render('login/login', {
             layout: 'layouts/navbar',
             error: 'El correo y/o la contraseña no coincide con un usuario existente',
@@ -65,16 +64,8 @@ function logout(req, res) {
   res.redirect('/');
 }
 
-// Controlador de la página de inicio (index)
-function index(req, res) {
-  res.render('home', {
-    layout: 'layouts/navbar',
-    activeHome: true,
-  });
-}
-
 module.exports = {
-  index: index,
+  //index: index,
   auth: auth,
   logout: logout,
   guardarNuevoUsuario: guardarNuevoUsuario,
