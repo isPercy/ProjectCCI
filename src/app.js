@@ -18,15 +18,9 @@ app.use(myconnection(mysql, {
 // configuracion de session
 app.use(session({
 	secret: 'secret-string-cci',
-	resave: false,
-	saveUninitialized: false
+	resave: true,
+	saveUninitialized: true
 }));
-
-//middleware
-app.use((req, res, next) => {
-   res.locals.user = req.session.user;
-   next();
-});
 
 // Configuracion de Body-Parser 
 app.use(bodyParser.json());
