@@ -19,7 +19,8 @@ app.use(myconnection(mysql, {
 app.use(session({
 	secret: 'secret-string-cci',
 	resave: true,
-	saveUninitialized: true
+	saveUninitialized: true,
+   loggedin: false
 }));
 
 // Configuracion de Body-Parser 

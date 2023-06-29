@@ -8,21 +8,33 @@ const { getUsuarios, DeleteUsuario, EditUsuarios } = require('../controllers/Use
 
 // Controlador para la ruta raíz
 router.get('/', (req, res) => {
-  res.render('home', {
-    layout: 'layouts/navbar'
-  });
+  if (req.session.loggedin) {
+    res.render('home', {
+      layout: 'layouts/navbar',
+      session: req.session.loggedin,
+      usuario: req.session.user['Nombre']+' ',
+    });
+  }
+  else {
+    res.render('home', {
+      layout: 'layouts/navbar',
+      session: req.session.loggedin
+    });
+  }
 });
 
 //Rutas de login
   router.get('/login', (req, res) => {
     res.render('login/login', {
-      layout: 'layouts/navbar'
+      layout: 'layouts/navbar',
+      session: req.session.loggedin     
     });
   });
 
   router.get('/register', (req, res) => {
     res.render('login/register', {
-      layout: 'layouts/navbar'
+      layout: 'layouts/navbar',
+      session: req.session.loggedin
     });
   });
 
@@ -38,21 +50,24 @@ router.get('/', (req, res) => {
   router.get('/FormularioEditar', (req, res) => {
     // const usuario = EditUsuarios(req.app.locals.connection);
     res.render('public/FormularioEditar', {
-      layout: 'layouts/navbar2',
+      layout: 'layouts/navbar',
+      session: req.session.loggedin
     });
   });
 
   //  RUTA DE ##########################
   router.get('/about', (req, res) => {
     res.render('public/about', { 
-      layout: 'layouts/navbar2'
+      layout: 'layouts/navbar',
+      session: req.session.loggedin
     });
   });
 
   //  RUTA DE ##########################
   router.get('/contact', (req, res) => {
     res.render('public/contact', { 
-      layout: 'layouts/navbar2'
+      layout: 'layouts/navbar',
+      session: req.session.loggedin
     });
   });
 
@@ -61,8 +76,9 @@ router.get('/', (req, res) => {
     try {
       const usuarios = await getUsuarios(req.app.locals.connection);
       res.render('public/usuarios', {
-        layout: 'layouts/navbar2',
-        usuarios: usuarios
+        layout: 'layouts/navbar',
+        usuarios: usuarios,
+        session: req.session.loggedin
       });
     } catch (error) {
       console.error(error);
@@ -73,7 +89,8 @@ router.get('/', (req, res) => {
   //  RUTA DE nueva-solicitud
   router.get('/nueva-solicitud', (req, res) => {
     res.render('public/nueva-solicitud', { 
-      layout: 'layouts/navbar2'
+      layout: 'layouts/navbar',
+      sessionStar: req.session.loggedin
     });
   });
 
@@ -84,8 +101,9 @@ router.get('/', (req, res) => {
     try {
       const solicitudes = await getSolicitudes(req.app.locals.connection);
       res.render('public/solicitudes', {
-        layout: 'layouts/navbar2',
-        solicitudes: solicitudes
+        layout: 'layouts/navbar',
+        solicitudes: solicitudes,
+        session: req.session.loggedin
       });
     } catch (error) {
       console.error(error);

@@ -1,14 +1,15 @@
 const { connection } = require('../conn');
 
 //  controlador para traer Usuarios
-const getUsuarios = (conn) =>{
+const getUsuarios = () => {
     return new Promise((resolve, reject) => {
-        const query = 'SELECT * FROM usuariouniversidad';
+      const query = 'SELECT * FROM usuariouniversidad WHERE ID_Rol != 1';
         connection.query(query, (error, results) => {
             if (error) {
-                reject(error);
-            } else {
-                resolve(results);
+            reject(error);
+            } 
+            else {
+            resolve(results);
             }
         });
     });
@@ -17,7 +18,7 @@ const getUsuarios = (conn) =>{
 //  Controlador Eliminar
 const DeleteUsuario = (req, res) => {
     const id = req.params.id;
-    connection.query('DELETE FROM usuariouniversidad WHERE ID = ?', id, (error, result) => {
+    connection.query('DELETE FROM usuariouniversidad WHERE ID = ?', id, (error) => {
         if (error) { 
             res.send('Solicitud de "eliminar" fallida');
         }
@@ -34,13 +35,13 @@ const EditUsuarios = (req, res) => {
             res.send('Error al cargar datos de usuarios');
         }
         else {
-            console.log(result);
             res.render('public/FormularioEditar', {
-                layout: 'layouts/navbar2',
+                layout: 'layouts/navbar',
+                session: req.session.loggedin,
                 Nombre: result[0].Nombre,
                 Rut: result[0].Rut,
                 Correo: result[0].Correo,
-                ID_Roll: result[0].ID_Roll,
+                ID_Roll: result[0].ID_Roll
             });
         }
     });
