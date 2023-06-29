@@ -92,8 +92,6 @@ router.get('/', (req, res) => {
     });
   });
 
-
-  
   //  RUTA DE VERS solicitudes
   router.get('/solicitudes', async (req, res) => {
     try {
@@ -103,7 +101,8 @@ router.get('/', (req, res) => {
         solicitudes: solicitudes,
         session: req.session.loggedin
       });
-    } catch (error) {
+    } 
+    catch (error) {
       console.error(error);
       res.status(500).send('Error obteniendo solicitudes');
     }
