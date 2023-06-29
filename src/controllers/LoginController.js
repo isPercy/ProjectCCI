@@ -17,7 +17,7 @@ function guardarNuevoUsuario (req, res) {
       }
       else {
         console.log(rows);
-        res.redirect('/login');
+        res.redirect('/');
       }
       });
     });
@@ -42,7 +42,7 @@ function auth(req, res) {
           req.session.loggedin = true;
           req.session.user = user[0];
           console.log(req.session.user);
-          res.redirect('/usuarios');
+          res.redirect('/');
         } else {
           res.render('login/login', {
             layout: 'layouts/navbar',

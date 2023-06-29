@@ -41,5 +41,5 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 //  Define la ubicacion de las rutas
-const Router = require('./routes/rutas');
+const Router = require('./routes/LasRutasPorRol');
 app.use('/', Router);

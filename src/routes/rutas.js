@@ -4,8 +4,6 @@ const { auth, logout, guardarNuevoUsuario } = require("../controllers/LoginContr
 const { getSolicitudes, DeleteSolicitud, EditSolicitud } = require('../controllers/SolicitudesController');
 const { getUsuarios, DeleteUsuario, EditUsuarios } = require('../controllers/UsersListController');
 
-// const { checkRole } = require('../controllers/middleware');
-
 // Controlador para la ruta raíz
 router.get('/', (req, res) => {
   if (req.session.loggedin) {
