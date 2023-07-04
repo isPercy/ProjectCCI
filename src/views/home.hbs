@@ -1,4 +1,8 @@
 <div class="text-black-400 text-xl">
 <dir>
-    <h1>Hola, {{usuario}}un gusto tenerte aca con nosotros!</h1>
+    {{#if session}}
+    <h1>Hola, <strong>{{usuario}}</strong> un gusto verte de nuevo!</h1>
+    {{else}}
+    <h1>Pagina inicial de Centro de Consultoria informatica</h1>
+    {{/if}}
 </div>

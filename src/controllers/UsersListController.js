@@ -41,11 +41,25 @@ const EditUsuarios = (req, res) => {
                 Nombre: result[0].Nombre,
                 Rut: result[0].Rut,
                 Correo: result[0].Correo,
-                ID_Roll: result[0].ID_Roll
+                ID_Roll: result[0].ID_Roll,
+                rolsesion1: 1 === req.session.user['ID_Rol'],
+                rolsesion2: 2 === req.session.user['ID_Rol'],
+                rolsesion3: 3 === req.session.user['ID_Rol'],
+                rolsesion4: 4 === req.session.user['ID_Rol'],
             });
         }
     });
 };
+
+// const RolesUsuario = (req , res) => {
+//     connection.query('SELECT * FROM rol', (err, rows) => {
+//         if (err) {
+//             console.error('Error al cargar roles: ', err);
+//             res.status(500).send('Error Al Obtener Roles');
+//             return
+//         }
+//     }); 
+// }
 
 module.exports = {
     getUsuarios, DeleteUsuario, EditUsuarios
