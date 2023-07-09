@@ -131,8 +131,7 @@ router.get('/about', checkRole([1, 2, 3, 4, 5]), (req, res) => {
 
 router.get('/nueva-solicitud', checkRole([1, 4]), async (req, res) => {
   // Lógica de la ruta para el rol de administrador
-  const tablasoli = await getSolicitudThisUser(req.app.locals.connection);
-  console.log(tablasoli);
+  const SolicitudList = await getSolicitudThisUser(req);
   res.render('public/nueva-solicitud', { 
     layout: 'layouts/navbar',
     session: req.session.loggedin,
@@ -141,7 +140,7 @@ router.get('/nueva-solicitud', checkRole([1, 4]), async (req, res) => {
     rolsesion2: 2 === req.session.user['ID_Rol'],
     rolsesion3: 3 === req.session.user['ID_Rol'],
     rolsesion4: 4 === req.session.user['ID_Rol'],
-    SolicitudList: tablasoli
+    SolicitudList: SolicitudList
   });
 });
 

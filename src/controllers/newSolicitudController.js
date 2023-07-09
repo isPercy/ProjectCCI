@@ -1,6 +1,6 @@
 const { connection } = require('../conn');
 
-const SaveSolicited = (req, res) => {
+function SaveSolicited(req, res) {
     const organizacion = req.body.organizacion;
     const nomrep = req.body.representante;
     const correo = req.body.CorreoCliente;
@@ -9,7 +9,7 @@ const SaveSolicited = (req, res) => {
     const query = 'INSERT INTO Solicitud (Descripcion, ID_UsuarioUniversidad,ID_OrganizacionyRepresentante) VALUES (?, ?, ?)';
     if(organizacion != '' && nomrep != '' && correo != '' && desc != '') {
         try{
-            req.getConnection((err, conn) => {
+            req.getConnection((conn) => {
                 conn.query(query, [desc, id, 1], (err, rows) => {
                     if (err) {
                         console.error('Error al guardar el usuario:', err);
@@ -31,9 +31,13 @@ const SaveSolicited = (req, res) => {
     }
 };
 
-const getSolicitudThisUser = (conn) => {
+
+
+function getSolicitudThisUser(req) {
     return new Promise((resolve, reject) => {
-        const query = 'SELECT s.ID AS ID, uu.Nombre AS Nombre, s.Descripcion, o.Nombre_Organizacion AS Nombre_Organizacion, ro.Nombre_Representante AS Nombre_Representante FROM solicitud s JOIN usuariouniversidad uu ON s.ID_UsuarioUniversidad = uu.ID JOIN organizacionre_representanteorganizacion orro ON s.ID_OrganizacionyRepresentante = orro.ID JOIN organizacion o ON orro.ID_Organizacion = o.ID JOIN representante_organizacion ro ON orro.ID_Representante = ro.ID';
+        const user_id = req.session.user['ID'];
+        const query = `SELECT s.ID AS ID, uu.Nombre AS Nombre, s.Descripcion, o.Nombre_Organizacion AS Nombre_Organizacion, ro.Nombre_Representante AS Nombre_Representante FROM solicitud s JOIN usuariouniversidad uu ON s.ID_UsuarioUniversidad = uu.ID JOIN organizacionre_representanteorganizacion orro ON s.ID_OrganizacionyRepresentante = orro.ID JOIN organizacion o ON orro.ID_Organizacion = o.ID JOIN representante_organizacion ro ON orro.ID_Representante = ro.ID WHERE uu.ID = ${user_id}`;
+        
         connection.query(query, (error, results) => {
             if (error) {
                 reject(error);
@@ -42,7 +46,7 @@ const getSolicitudThisUser = (conn) => {
             }
         });
     });
-};
+}
 
 module.exports = {
     SaveSolicited, getSolicitudThisUser

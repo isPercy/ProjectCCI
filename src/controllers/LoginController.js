@@ -41,7 +41,7 @@ function auth(req, res) {
         if (user.length > 0) {
           req.session.loggedin = true;
           req.session.user = user[0];
-          console.log(req.session.user);
+          // console.log(req.session.user);
           res.redirect('/');
         } else {
           res.render('login/login', {
