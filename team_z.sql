@@ -191,3 +191,8 @@ ALTER TABLE `solicitud`
 ALTER TABLE `usuariouniversidad`
   ADD CONSTRAINT `usuariouniversidad_ibfk_1` FOREIGN KEY (`ID_Rol`) REFERENCES `rol` (`ID`) ON UPDATE CASCADE;
 COMMIT;
+
+-- Agregar datos por defectos
+INSERT INTO rol (NomRol) values ('Admin'), ('Comité'), ('Profesor'), ('Alumno'), ('Desconocido');
+INSERT INTO usuariouniversidad (Rut, Nombre, Contrasenia, Correo, ID_Rol) values ('19981677.2', 'Juan Pablo Godoy', 'a', 'jpablo.godoyb@gmail.com', 1);
+INSERT INTO estado (Nombre_Estado) values ('Aceptado'), ('Rechazado'), ('Pendiente');

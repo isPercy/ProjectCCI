@@ -1,3 +1,9 @@
+//validamos si el rut ingresado tiene un formato correcto
+function validarRut(rut) {
+  const rutRegex = /^[0-9]{7,8}-?[0-9kK]{1}$/;
+  return rutRegex.test(rut);
+}
+
 // Controlador para guardar un registro de usuario nuevo
 function guardarNuevoUsuario (req, res) {
   //#region variables
@@ -7,24 +13,29 @@ function guardarNuevoUsuario (req, res) {
   const correo = req.body.correo;
   const rol = 5;
   //#endregion
-  const query = 'INSERT INTO usuariouniversidad (Rut, Nombre, Contrasenia, Correo, ID_Rol) VALUES (?, ?, ?, ?, ?)';
-  try{
-    req.getConnection((err, conn) => {
-      conn.query(query, [rut, nombre, contraseña, correo, rol],(err, rows) => {
-      if (err) {
-        console.error('Error al guardar el usuario:', err);
-        res.status(500).send('Error al guardar el usuario');
-      }
-      else {
-        console.log(rows);
-        res.redirect('/');
-      }
+  if (validarRut(rut)) {
+    const query = 'INSERT INTO usuariouniversidad (Rut, Nombre, Contrasenia, Correo, ID_Rol) VALUES (?, ?, ?, ?, ?)';
+    try{
+      req.getConnection((err, conn) => {
+        conn.query(query, [rut, nombre, contraseña, correo, rol],(err, rows) => {
+        if (err) {
+          console.error('Error al guardar el usuario:', err);
+          res.status(500).send('Error al guardar el usuario');
+        }
+        else {
+          console.log(rows);
+          res.redirect('/');
+        }
+        });
       });
-    });
+    }
+    catch (error) {
+      // console.error('Error al guardar el usuario:', error);
+      res.status(500).send('Error al guardar el usuario');
+    }
   }
-  catch (error) {
-    // console.error('Error al guardar el usuario:', error);
-    res.status(500).send('Error al guardar el usuario');
+  else{
+    res.send('Formato del rut no valido');
   }
 };
 
@@ -65,7 +76,6 @@ function logout(req, res) {
 }
 
 module.exports = {
-  //index: index,
   auth: auth,
   logout: logout,
   guardarNuevoUsuario: guardarNuevoUsuario,

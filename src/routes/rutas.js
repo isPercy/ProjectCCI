@@ -6,7 +6,7 @@ const { getSolicitudes, DeleteSolicitud, EditSolicitud } = require('../controlle
 const { getUsuarios, DeleteUsuario, EditUsuarios } = require('../controllers/UsersListController');
 const { SaveSolicited, getSolicitudThisUser } = require('../controllers/newSolicitudController');
 
-// Ruta por defecto para el ingreso global
+//#region Rutas para visitantes
 router.get('/', (req, res) => {
   if (req.session.loggedin) {
     res.render('home', {
@@ -26,8 +26,6 @@ router.get('/', (req, res) => {
     });
   }
 });
-
-// Ruta protegida por autenticación y restricción de roles
 router.get('/login', (req, res) => {
   // Verificar si el usuario está autenticado
   if (!req.session.loggedin) {
@@ -50,7 +48,6 @@ router.get('/login', (req, res) => {
     }
   }
 });
-
 //Ruta para ingresar al registrar usuario
 router.get('/register', (req, res) => {
   // Verificar si el usuario está autenticado
@@ -64,13 +61,13 @@ router.get('/register', (req, res) => {
     res.status(403).send('No puedes registrar a nadie con una sesion iniciada');
   }
 });
-
 router.post('/auth', auth);
 router.post('/RegisterUser', guardarNuevoUsuario);
 router.get('/logout', logout);
+//#endregion
 
+//------------------------- Vistas solamente para ADMIN -------------------------
 
-// Resto de las rutas protegidas solo para el rol de administrador (ID_Rol = 1)
 router.get('/usuarios', checkRole([1]), async (req, res) => {
   // Lógica de la ruta para el rol de administrador
   try{
@@ -90,6 +87,7 @@ router.get('/usuarios', checkRole([1]), async (req, res) => {
   }
 });
 
+// ruta para cargar las solicitudes
 router.get('/solicitudes', checkRole([1]), async (req, res) => {
   // Lógica de la ruta para el rol de administrador
   try{
@@ -108,26 +106,8 @@ router.get('/solicitudes', checkRole([1]), async (req, res) => {
     res.status(500).send(err);
   }
 });
-//delete and edit Usuario
-router.get('/EditarUsuario/:id', checkRole([1]) , EditUsuarios);
-router.get('/EliminarUsuario/:id', checkRole([1]), DeleteUsuario);
-//delete and edit solicitud
-router.get('/EliminarSolicitud/:id', checkRole([1]), DeleteSolicitud);
-router.get('/EditSolicitud/:id', checkRole([1]), EditSolicitud);
 
-//----------------------------------------------------------------
-
-router.get('/about', checkRole([1, 2, 3, 4, 5]), (req, res) => {
-  // Lógica de la ruta para el rol de administrador
-  res.render('public/about', { 
-    layout: 'layouts/navbar',
-    session: req.session.loggedin,
-    rolsesion1: 1 === req.session.user['ID_Rol'],
-    rolsesion2: 2 === req.session.user['ID_Rol'],
-    rolsesion3: 3 === req.session.user['ID_Rol'],
-    rolsesion4: 4 === req.session.user['ID_Rol'],
-  });
-});
+//------------------------- Vistas de Alumno y ADMIN -------------------------
 
 router.get('/nueva-solicitud', checkRole([1, 4]), async (req, res) => {
   // Lógica de la ruta para el rol de administrador
@@ -144,7 +124,7 @@ router.get('/nueva-solicitud', checkRole([1, 4]), async (req, res) => {
   });
 });
 
-router.post('/AddSolicitud', SaveSolicited);
+//------------------------- Vistas generales para personas logeadas -------------------------
 
 router.get('/about', checkRole([1, 2, 3, 4, 5]), (req, res) => {
   // Lógica de la ruta para el rol de administrador
@@ -153,5 +133,27 @@ router.get('/about', checkRole([1, 2, 3, 4, 5]), (req, res) => {
     session: req.session.loggedin
   });
 });
+
+router.get('/about', checkRole([1, 2, 3, 4, 5]), (req, res) => {
+  // Lógica de la ruta para el rol de administrador
+  res.render('public/about', { 
+    layout: 'layouts/navbar',
+    session: req.session.loggedin,
+    rolsesion1: 1 === req.session.user['ID_Rol'],
+    rolsesion2: 2 === req.session.user['ID_Rol'],
+    rolsesion3: 3 === req.session.user['ID_Rol'],
+    rolsesion4: 4 === req.session.user['ID_Rol'],
+  });
+});
+
+router.post('/AddSolicitud', checkRole([1, 4]), SaveSolicited);
+
+//------------------------- Acciones de botones del ADMIN -------------------------
+//delete and edit Usuario
+router.get('/EditarUsuario/:id', checkRole([1]) , EditUsuarios);
+router.get('/EliminarUsuario/:id', checkRole([1]), DeleteUsuario);
+//delete and edit solicitud
+router.get('/EliminarSolicitud/:id', checkRole([1]), DeleteSolicitud);
+router.get('/EditSolicitud/:id', checkRole([1]), EditSolicitud);
 
 module.exports = router;
