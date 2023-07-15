@@ -9,50 +9,39 @@
                 <form>
                     <div class="lg:col-span-3">
                         <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
-                            
+
                             <div class="md:col-span-5">
                                 <fieldset disabled> 
                                     <label for="name">Nombre</label>
-                                    <input type="text" name="name" id="name" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="{{Nombre}}" placeholder="" />
+                                    <input type="text" name="name" id="name" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="{{usuario.Nombre}}" placeholder="{{usuario.Nombre}}" />
                                 </fieldset> 
                             </div>
 
                             <div class="md:col-span-5">
                                 <fieldset disabled> 
                                     <label for="run">RUT</label>
-                                    <input type="text" name="run" id="run" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="{{Rut}}" />
+                                    <input type="text" name="run" id="run" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="{{usuario.Rut}}" />
                                 </fieldset> 
                             </div>
 
                             <div class="md:col-span-5">
                                 <fieldset disabled> 
                                     <label for="email">Correo</label>
-                                    <input type="text" name="email" id="email" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="{{Correo}}" placeholder="" />
+                                    <input type="text" name="email" id="email" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="{{usuario.Correo}}" placeholder="" />
                                 </fieldset> 
                             </div>
 
-                            <div class=" md:col-span-5 h-10 bg-white-100 flex border border-gray-200 rounded items-center mt-1">    
-                                <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="cursor-pointer outline-none focus:outline-none border-l border-gray-200 transition-all text-black-300 hover:text-blue-600" type="button">Roles 
-                                    <svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
-                                        </path>
-                                    </svg>
-                                </button>
-                            </div>
                             <!-- Dropdown menu -->
-                            <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-                                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
-                                {{#each roles}}
-                                    <li>
-                                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                                            {{this}}
-                                        </a>
-                                    </li>
-                                {{/each}}
-                                </ul>
+                            <div class="md:col-span-5 pt-4">
+                                <Select class="h-10 border mt-1 rounded px-4 w-full" id="rol" name="rol">
+                                    <option value="0">Seleccione un rol para el usuario</option>
+                                    {{#each OpcionRoles}}
+                                    <option value="{{ID}}">{{NomRol}}</option>
+                                    {{/each}}
+                                </Select>
                             </div>
 
-                            <div class="md:col-span-5 text-right">
+                            <div class="md:col-span-5 text-right pt-4">
                                 <div class="inline-flex items-end">
                                     <a href="/SaveEdit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Realizar Cambios</a>
                                 </div>

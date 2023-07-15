@@ -71,7 +71,7 @@ router.get('/logout', logout);
 router.get('/usuarios', checkRole([1]), async (req, res) => {
   // Lógica de la ruta para el rol de administrador
   try{
-    const usuarios = await getUsuarios(req.app.locals.connection);
+    const usuarios = await getUsuarios(req);
     res.render('public/usuarios', { 
       layout: 'layouts/navbar',
       usuarios: usuarios,
@@ -87,11 +87,10 @@ router.get('/usuarios', checkRole([1]), async (req, res) => {
   }
 });
 
-// ruta para cargar las solicitudes
 router.get('/solicitudes', checkRole([1]), async (req, res) => {
   // Lógica de la ruta para el rol de administrador
   try{
-    const solicitudes = await getSolicitudes(req.app.locals.connection);
+    const solicitudes = await getSolicitudes(req);
     res.render('public/solicitudes', { 
       layout: 'layouts/navbar',
       solicitudes: solicitudes,
@@ -106,6 +105,14 @@ router.get('/solicitudes', checkRole([1]), async (req, res) => {
     res.status(500).send(err);
   }
 });
+
+//------------------------- Acciones de botones del ADMIN -------------------------
+
+router.get('/EditarUsuario/:id', checkRole([1]) , EditUsuarios);//EDIT Usuario
+router.get('/EliminarUsuario/:id', checkRole([1]), DeleteUsuario);//DELETE Usuario
+
+router.get('/EliminarSolicitud/:id', checkRole([1]), DeleteSolicitud);//DELETE Solicitud
+router.get('/EditSolicitud/:id', checkRole([1]), EditSolicitud);//EDIT Solicitud
 
 //------------------------- Vistas de Alumno y ADMIN -------------------------
 
@@ -124,15 +131,9 @@ router.get('/nueva-solicitud', checkRole([1, 4]), async (req, res) => {
   });
 });
 
-//------------------------- Vistas generales para personas logeadas -------------------------
+router.post('/AddSolicitud', checkRole([1, 4]), SaveSolicited);
 
-router.get('/about', checkRole([1, 2, 3, 4, 5]), (req, res) => {
-  // Lógica de la ruta para el rol de administrador
-  res.render('public/about', { 
-    layout: 'layouts/navbar',
-    session: req.session.loggedin
-  });
-});
+//------------------------- Vistas generales para personas logeadas -------------------------
 
 router.get('/about', checkRole([1, 2, 3, 4, 5]), (req, res) => {
   // Lógica de la ruta para el rol de administrador
@@ -145,15 +146,5 @@ router.get('/about', checkRole([1, 2, 3, 4, 5]), (req, res) => {
     rolsesion4: 4 === req.session.user['ID_Rol'],
   });
 });
-
-router.post('/AddSolicitud', checkRole([1, 4]), SaveSolicited);
-
-//------------------------- Acciones de botones del ADMIN -------------------------
-//delete and edit Usuario
-router.get('/EditarUsuario/:id', checkRole([1]) , EditUsuarios);
-router.get('/EliminarUsuario/:id', checkRole([1]), DeleteUsuario);
-//delete and edit solicitud
-router.get('/EliminarSolicitud/:id', checkRole([1]), DeleteSolicitud);
-router.get('/EditSolicitud/:id', checkRole([1]), EditSolicitud);
 
 module.exports = router;
