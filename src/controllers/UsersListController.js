@@ -54,7 +54,7 @@ function EditUsuarios(req, res) {
             });
         }
     });
-}
+};
 
 function CargarRoles() {
     return new Promise((resolve, reject) => {
@@ -70,6 +70,38 @@ function CargarRoles() {
     });
 };
 
+function GuardarRol(req, res) {
+
+    const userId = req.params.id;
+    const rolId = req.body.role;    
+    console.log(rolId+' '+userId);
+
+    // Realizar la consulta SQL para actualizar el rol del usuario
+    // const query = `UPDATE usuariouniversidad SET ID_Rol = ${roleId} WHERE ID = ${userId}`;
+    // connection.query(query, (error, results) => {
+    //     if (error) {
+    //         res.send('Error al cambiar el rol del usuario');
+    //     }
+    //     else {
+    //         res.redirect('/usuarios');
+    //     }
+    // });
+
+    // return new Promise((resolve, reject) => {
+    //     const query = `UPDATE usuariouniversidad SET ID_Rol = ? WHERE ID = ?`;
+    //     connection.query(query, [roleId, userId], (error, results) => {
+    //         if (error) {
+    //             reject(error);
+    //         } else {
+    //             resolve(results);
+    //         }
+    //     });
+    // });
+
+};
+
+
+
 module.exports = {
-    getUsuarios, DeleteUsuario, EditUsuarios
+    getUsuarios, DeleteUsuario, EditUsuarios, GuardarRol
 };

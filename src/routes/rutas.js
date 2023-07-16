@@ -2,8 +2,8 @@ const express = require('express');
 const router = express.Router();
 const { checkRole } = require('./middleware');
 const { auth, logout, guardarNuevoUsuario } = require("../controllers/LoginController");
-const { getSolicitudes, DeleteSolicitud, EditSolicitud } = require('../controllers/SolicitudesController');
-const { getUsuarios, DeleteUsuario, EditUsuarios } = require('../controllers/UsersListController');
+const { getSolicitudes, DeleteSolicitud, RevisarSolicitud } = require('../controllers/SolicitudesController');
+const { getUsuarios, DeleteUsuario, EditUsuarios, GuardarRol } = require('../controllers/UsersListController');
 const { SaveSolicited, getSolicitudThisUser } = require('../controllers/newSolicitudController');
 
 //#region Rutas para visitantes
@@ -112,8 +112,8 @@ router.get('/EditarUsuario/:id', checkRole([1]) , EditUsuarios);//EDIT Usuario
 router.get('/EliminarUsuario/:id', checkRole([1]), DeleteUsuario);//DELETE Usuario
 
 router.get('/EliminarSolicitud/:id', checkRole([1]), DeleteSolicitud);//DELETE Solicitud
-router.get('/EditSolicitud/:id', checkRole([1]), EditSolicitud);//EDIT Solicitud
-
+router.get('/RevisarSolicitud/:id', checkRole([1]), RevisarSolicitud);//REVISAR Solicitud
+router.get('/SaveEdit/:id', checkRole([1]), GuardarRol );//
 //------------------------- Vistas de Alumno y ADMIN -------------------------
 
 router.get('/nueva-solicitud', checkRole([1, 4]), async (req, res) => {

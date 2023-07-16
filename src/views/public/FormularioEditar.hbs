@@ -7,7 +7,7 @@
                     <p>Editar Usuario</p>
                 </div>
                 
-                <form>
+                <form action="/SaveEdit" method="POST">
                     <div class="lg:col-span-3">
                         <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
 
@@ -34,7 +34,7 @@
 
                             <!-- Dropdown menu -->
                             <div class="md:col-span-5 pt-4">
-                                <Select class="h-10 border mt-1 rounded px-4 w-full" id="rol" name="rol">
+                                <Select id="role" name="role" class="h-10 border mt-1 rounded px-4 w-full">
                                     <option value="0">Seleccione un rol para el usuario</option>
                                     {{#each OpcionRoles}}
                                     <option value="{{ID}}">{{NomRol}}</option>
@@ -44,7 +44,7 @@
 
                             <div class="md:col-span-5 text-right pt-4">
                                 <div class="inline-flex items-end">
-                                    <a href="/SaveEdit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Realizar Cambios</a>
+                                    <a href="/SaveEdit/{{usuario.ID}}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Realizar Cambios</a>
                                 </div>
                             </div>
                         </div>
