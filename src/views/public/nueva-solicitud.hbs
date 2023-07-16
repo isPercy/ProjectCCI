@@ -3,23 +3,29 @@
         <div class="col-span-1">
             <div class="bg-white shadow-md p-4">
                 <form action="/AddSolicitud" method="post">
+                    {{!-- DATOS DE USUARIO LOGUEADO --}}
                     <div class="mb-4">
                         <input type="text" class="bg-gray-200 border border-gray-300 px-4 py-2 w-full" name="nombre" placeholder="{{usuario.Nombre}}" readonly>
                     </div>
                     <div class="mb-4">
                         <input type="text" name="RUN" class="bg-gray-200 border border-gray-300 px-4 py-2 w-full" name="nombre" placeholder="{{usuario.Rut}}" readonly>
                     </div>
+
+                    {{!-- IMPUTS PARA GUARDAR DATOS DE ORGANIZACION Y PROPUESTA --}}
                     <div class="mb-4">
-                        <input type="text" id="organizacion" name="organizacion" class="border border-gray-300 px-4 py-2 w-full" placeholder="Organización">
+                        <input type="text" id="Organizacion" name="Organizacion" class="border border-gray-300 px-4 py-2 w-full" autocomplete="off" placeholder="Organización">
                     </div>
                     <div class="mb-4">
-                        <input type="text" id="representante" name="representante" class="border border-gray-300 px-4 py-2 w-full" placeholder="Nombre de Representante">
+                        <input type="text" id="RutCliente" name="RutCliente" class="border border-gray-300 px-4 py-2 w-full" autocomplete="off" placeholder="RUT de Representante">
                     </div>
                     <div class="mb-4">
-                        <input type="text" id="CorreoCliente" name="CorreoCliente" class="border border-gray-300 px-4 py-2 w-full" placeholder="Correo Cliente">
+                        <input type="text" id="Representante" name="Representante" class="border border-gray-300 px-4 py-2 w-full" autocomplete="off" placeholder="Nombre de Representante">
                     </div>
                     <div class="mb-4">
-                        <textarea id="descripcion" name="descripcion" rows="2" class="border border-gray-300 px-4 py-2 w-full" placeholder="Descripcion de su Proyecto"></textarea>
+                        <input type="text" id="CorreoCliente" name="CorreoCliente" class="border border-gray-300 px-4 py-2 w-full" autocomplete="off" placeholder="Correo Cliente">
+                    </div>
+                    <div class="mb-4">
+                        <textarea id="Descripcion" name="Descripcion de propuesta" rows="2" class="border border-gray-300 px-4 py-2 w-full" autocomplete="off" placeholder="Descripcion de su Proyecto"></textarea>
                     </div>
                     <div class="mb-4">
                         <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">

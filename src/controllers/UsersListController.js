@@ -3,7 +3,7 @@ const { connection } = require('../conn');
 //  controlador para traer Usuarios
 function getUsuarios(){
     return new Promise((resolve, reject) => {
-        const query = 'SELECT * FROM usuariouniversidad JOIN rol ON usuariouniversidad.ID_Rol = rol.ID WHERE usuariouniversidad.ID_Rol != 1';
+        const query = 'SELECT uu.*, r.NomRol FROM usuariouniversidad uu JOIN rol r ON uu.ID_Rol = r.ID WHERE ID_Rol != 1';
         connection.query(query, (error, results) => {
             if (error) {
                 reject(error);
@@ -48,7 +48,6 @@ function EditUsuarios(req, res) {
                     OpcionRoles: roles,
                     usuario: user[0]
                 });
-                console.log(id);
             })
             .catch(error => {
                 res.send('Error al cargar roles');
