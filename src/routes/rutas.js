@@ -110,10 +110,10 @@ router.get('/solicitudes', checkRole([1]), async (req, res) => {
 
 router.get('/EditarUsuario/:id', checkRole([1]) , EditUsuarios);//EDIT Usuario
 router.get('/EliminarUsuario/:id', checkRole([1]), DeleteUsuario);//DELETE Usuario
+router.post('/SaveEdit/:id', checkRole([1]), GuardarRol);//UPDATE Rol de Usuario
 
 router.get('/EliminarSolicitud/:id', checkRole([1]), DeleteSolicitud);//DELETE Solicitud
 router.get('/RevisarSolicitud/:id', checkRole([1]), RevisarSolicitud);//REVISAR Solicitud
-router.get('/SaveEdit/:id', checkRole([1]), GuardarRol );//
 //------------------------- Vistas de Alumno y ADMIN -------------------------
 
 router.get('/nueva-solicitud', checkRole([1, 4]), async (req, res) => {

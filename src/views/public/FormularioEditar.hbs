@@ -7,10 +7,11 @@
                     <p>Editar Usuario</p>
                 </div>
                 
-                <form action="/SaveEdit" method="POST">
+                <form action="/SaveEdit/{{usuario.ID}}" method="POST"> <!-- Agregamos {{usuario.ID}} al atributo action para pasar el ID como parte de la ruta -->
                     <div class="lg:col-span-3">
                         <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
 
+                            <!-- Resto del formulario -->
                             <div class="md:col-span-5">
                                 <fieldset disabled> 
                                     <label for="name">Nombre</label>
@@ -32,26 +33,31 @@
                                 </fieldset> 
                             </div>
 
+
                             <!-- Dropdown menu -->
                             <div class="md:col-span-5 pt-4">
-                                <Select id="role" name="role" class="h-10 border mt-1 rounded px-4 w-full">
+                                <select id="role" name="role" class="h-10 border mt-1 rounded px-4 w-full"> <!-- Cambiamos 'Select' a 'select' -->
                                     <option value="0">Seleccione un rol para el usuario</option>
                                     {{#each OpcionRoles}}
-                                    <option value="{{ID}}">{{NomRol}}</option>
+                                    <option value="{{this.ID}}">{{this.NomRol}}</option>
                                     {{/each}}
-                                </Select>
+                                </select>
                             </div>
 
                             <div class="md:col-span-5 text-right pt-4">
                                 <div class="inline-flex items-end">
-                                    <a href="/SaveEdit/{{usuario.ID}}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Realizar Cambios</a>
+                                    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Realizar Cambios</button> <!-- Cambiamos 'a' a 'button' y eliminamos el atributo 'href' -->
                                 </div>
                             </div>
                         </div>
                     </div>
                 </form>
-
             </div>
         </div>
     </div>
 </div>
+
+
+
+
+                            

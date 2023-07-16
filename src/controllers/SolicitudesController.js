@@ -28,7 +28,7 @@ function DeleteSolicitud (req, res) {
     });
 };
 
-//  Controlador para dirigeir a Editar solicitud
+//  Controlador para dirigeir a Editar solicitud tiene que redirigir vista de revision solicitud
 function RevisarSolicitud (req, res) {
     const id = req.params.id;
     connection.query('SELECT * FROM solicitud WHERE ID = ?', id, (error, result) => {
