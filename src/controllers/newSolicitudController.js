@@ -2,34 +2,48 @@ const { connection } = require('../conn');
 
 //  Funcion para guardar solicitud de practica.
 function SaveSolicited(req, res) {
-    const organizacion = req.body.organizacion;
-    const nomrep = req.body.representante;
-    const correo = req.body.CorreoCliente;
-    const desc = req.body.descripcion;
-    const id = req.session.user['ID'];
-    const query = 'INSERT INTO Solicitud (Descripcion, ID_UsuarioUniversidad,ID_OrganizacionyRepresentante) VALUES (?, ?, ?)';
-    if(organizacion != '' && nomrep != '' && correo != '' && desc != '') {
-        try{
-            req.getConnection((conn) => {
-                conn.query(query, [desc, id, 1], (err, rows) => {
-                    if (err) {
-                        console.error('Error al guardar el usuario:', err);
-                        res.status(500).send('Error al guardar el usuario');
-                    }
-                    else {
-                        console.log(rows);
-                        res.redirect('/nueva-solicitud');
-                    }
-                });
+    const organizacion = req.body.Organizacion;
+    const rutCliente = req.body.RutCliente;
+    const representante = req.body.Representante;
+    const correoCliente = req.body.CorreoCliente;
+    const descripcion = req.body.Descripcion;
+    const userId = req.session.user["ID"];
+    const estadoId = 3;
+    console.log(descripcion);
+    // const query = 'INSERT INTO Solicitud (Descripcion, ID_UsuarioUniversidad,ID_OrganizacionyRepresentante) VALUES (?, ?, ?)';
+   
+    const queryOrganizacion = `INSERT INTO organizacion (Nombre_Organizacion) VALUES (?)`;
+    connection.query(queryOrganizacion, [organizacion], (error, results) => {
+    if (error) throw error;
+
+    const organizacionId = results.insertId;
+
+    // Inserta los datos en la tabla "representante_organizacion"
+    const queryRepresentante = `INSERT INTO representante_organizacion (Rut, Nombre_Representante, Correo) VALUES (?, ?, ?)`;
+    connection.query(queryRepresentante, [rutCliente, representante, correoCliente], (error, results) => {
+        if (error) throw error;
+
+        const representanteId = results.insertId;
+
+        // Inserta los datos en la tabla "organizacion_representanteorganizacion"
+        const queryRelacion = `INSERT INTO organizacion_representanteorganizacion (ID_Representante, ID_Organizacion) VALUES (?, ?)`;
+        connection.query(queryRelacion, [representanteId, organizacionId], (error, results) => {
+            if (error) throw error;
+
+            const relacionId = results.insertId;
+
+            // Inserta los datos en la tabla "solicitud"
+            const querySolicitud = `INSERT INTO solicitud (Descripcion, ID_UsuarioUniversidad, ID_Estado, ID_OrganizacionyRepresentante) VALUES (?, ?, ?, ?)`;
+            connection.query(querySolicitud, [descripcion, userId, estadoId, relacionId], (error, results) => {
+            if (error) throw error;
+
+                // Realiza alguna acción adicional, como redireccionar a otra página
+                res.redirect('/nueva-solicitud');
             });
-        }
-        catch (err) {
-            console.log(err);
-        }
-    }
-    else{
-        console.send('Error, no se permiten espacios vacios');
-    }
+        });
+    });
+  });
+
 };
 
 //  Funcion para cargar tabla de solicitudes del usuario logeado.
