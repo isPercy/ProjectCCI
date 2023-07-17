@@ -22,7 +22,7 @@ function DeleteSolicitud (req, res) {
             res.send('Solicitud fallida');
         }
         else {
-            console.log(result);
+            // console.log(result);
             res.redirect('/solicitudes');
         }
     });

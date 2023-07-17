@@ -5,7 +5,7 @@ const { auth, logout, guardarNuevoUsuario } = require("../controllers/LoginContr
 const { getSolicitudes, DeleteSolicitud, RevisarSolicitud } = require('../controllers/SolicitudesController');
 const { getUsuarios, DeleteUsuario, EditUsuarios, GuardarRol } = require('../controllers/UsersListController');
 const { SaveSolicited, getSolicitudThisUser } = require('../controllers/newSolicitudController');
-
+const { CallDataset } = require('../controllers/CallDataDashboard.js');
 //#region Rutas para visitantes
 router.get('/', (req, res) => {
   if (req.session.loggedin) {
@@ -114,6 +114,15 @@ router.post('/SaveEdit/:id', checkRole([1]), GuardarRol);//UPDATE Rol de Usuario
 
 router.get('/EliminarSolicitud/:id', checkRole([1]), DeleteSolicitud);//DELETE Solicitud
 router.get('/RevisarSolicitud/:id', checkRole([1]), RevisarSolicitud);//REVISAR Solicitud
+
+//------------------------- Vistas de ADMIN y Directiva -------------------------
+
+router.get('/dashboard', checkRole([1, 2, 3]), (req, res) => {
+  res.render('public/dashboard', { 
+    layout: 'layouts/navbar'
+  });
+});
+
 //------------------------- Vistas de Alumno y ADMIN -------------------------
 
 router.get('/nueva-solicitud', checkRole([1, 4]), async (req, res) => {

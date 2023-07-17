@@ -91,8 +91,6 @@ function GuardarRol(req, res) {
     }
 };
 
-
-
 module.exports = {
     getUsuarios, DeleteUsuario, EditUsuarios, GuardarRol
 };
