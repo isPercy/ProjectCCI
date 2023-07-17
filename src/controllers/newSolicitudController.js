@@ -1,5 +1,10 @@
 const { connection } = require('../conn');
 
+function validarRut(rut) {
+    const rutRegex = /^[0-9]{7,8}-?[0-9kK]{1}$/;
+    return rutRegex.test(rut);
+}
+
 //  Funcion para guardar solicitud de practica.
 function SaveSolicited(req, res) {
     const organizacion = req.body.Organizacion;
@@ -9,41 +14,45 @@ function SaveSolicited(req, res) {
     const descripcion = req.body.Descripcion;
     const userId = req.session.user["ID"];
     const estadoId = 3;
-    console.log(descripcion);
-    // const query = 'INSERT INTO Solicitud (Descripcion, ID_UsuarioUniversidad,ID_OrganizacionyRepresentante) VALUES (?, ?, ?)';
-   
-    const queryOrganizacion = `INSERT INTO organizacion (Nombre_Organizacion) VALUES (?)`;
-    connection.query(queryOrganizacion, [organizacion], (error, results) => {
-    if (error) throw error;
 
-    const organizacionId = results.insertId;
-
-    // Inserta los datos en la tabla "representante_organizacion"
-    const queryRepresentante = `INSERT INTO representante_organizacion (Rut, Nombre_Representante, Correo) VALUES (?, ?, ?)`;
-    connection.query(queryRepresentante, [rutCliente, representante, correoCliente], (error, results) => {
+    if (validarRut(rutCliente)){
+        // const query = 'INSERT INTO Solicitud (Descripcion, ID_UsuarioUniversidad,ID_OrganizacionyRepresentante) VALUES (?, ?, ?)';
+       
+        const queryOrganizacion = `INSERT INTO organizacion (Nombre_Organizacion) VALUES (?)`;
+        connection.query(queryOrganizacion, [organizacion], (error, results) => {
         if (error) throw error;
-
-        const representanteId = results.insertId;
-
-        // Inserta los datos en la tabla "organizacion_representanteorganizacion"
-        const queryRelacion = `INSERT INTO organizacion_representanteorganizacion (ID_Representante, ID_Organizacion) VALUES (?, ?)`;
-        connection.query(queryRelacion, [representanteId, organizacionId], (error, results) => {
+    
+        const organizacionId = results.insertId;
+    
+        // Inserta los datos en la tabla "representante_organizacion"
+        const queryRepresentante = `INSERT INTO representante_organizacion (Rut, Nombre_Representante, Correo) VALUES (?, ?, ?)`;
+        connection.query(queryRepresentante, [rutCliente, representante, correoCliente], (error, results) => {
             if (error) throw error;
-
-            const relacionId = results.insertId;
-
-            // Inserta los datos en la tabla "solicitud"
-            const querySolicitud = `INSERT INTO solicitud (Descripcion, ID_UsuarioUniversidad, ID_Estado, ID_OrganizacionyRepresentante) VALUES (?, ?, ?, ?)`;
-            connection.query(querySolicitud, [descripcion, userId, estadoId, relacionId], (error, results) => {
-            if (error) throw error;
-
-                // Realiza alguna acción adicional, como redireccionar a otra página
-                res.redirect('/nueva-solicitud');
+    
+            const representanteId = results.insertId;
+    
+            // Inserta los datos en la tabla "organizacion_representanteorganizacion"
+            const queryRelacion = `INSERT INTO organizacion_representanteorganizacion (ID_Representante, ID_Organizacion) VALUES (?, ?)`;
+            connection.query(queryRelacion, [representanteId, organizacionId], (error, results) => {
+                if (error) throw error;
+    
+                const relacionId = results.insertId;
+    
+                // Inserta los datos en la tabla "solicitud"
+                const querySolicitud = `INSERT INTO solicitud (Descripcion, ID_UsuarioUniversidad, ID_Estado, ID_OrganizacionyRepresentante) VALUES (?, ?, ?, ?)`;
+                connection.query(querySolicitud, [descripcion, userId, estadoId, relacionId], (error, results) => {
+                if (error) throw error;
+    
+                    // Realiza alguna acción adicional, como redireccionar a otra página
+                    res.redirect('/nueva-solicitud');
+                });
             });
         });
-    });
-  });
-
+      });
+    }
+    else{
+        res.send('Rut no valido, intente nuevamente');
+    }
 };
 
 //  Funcion para cargar tabla de solicitudes del usuario logeado.

@@ -56,6 +56,7 @@ function EditUsuarios(req, res) {
     });
 };
 
+//  Funcion para cargar datos de rol en SelectBox
 function CargarRoles() {
     return new Promise((resolve, reject) => {
         const query = 'SELECT * FROM rol';
@@ -70,6 +71,7 @@ function CargarRoles() {
     });
 };
 
+//  Funcion para Guardar el nuevo rol del usuario
 function GuardarRol(req, res) {
 
     const userId = req.params.id;
