@@ -1,1 +1,78 @@
-<h1>hola</h1>
+<div class="mt-4 mb-3 mx-4 bg-white shadow-lg rounded-lg">
+  <div class="flex items-center justify-between px-4 py-2 bg-happy-green text-black">
+    <div class="flex items-center">
+      <i class="lnr lnr-charts text-2xl mr-2"></i>
+      <h2 class="text-5xl font-medium">Dashboard</h2>
+    </div>
+    {{!-- <div>
+      <button class="btn btn-outline-focus btn-sm">View All</button>
+    </div> --}}
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4 p-4">
+    <div class="bg-yellow-200 rounded-lg p-4">
+      <div class="flex items-center">
+        <div class="rounded-full bg-warning opacity-25 p-2">
+          <i class="lnr lnr-laptop-phone text-dark opacity-75"></i>
+        </div>
+        <div class="ml-4">
+          <h3 class="text-lg font-medium">Cantidad de solicitudes en espera:</h3>
+          <p class="text-xl font-semibold">{{count.Espera}}</p>
+          <p class="text-red-500">
+            <i class="fa fa-angle-down"></i>
+            <span class="pl-1">54.1%</span>
+            less earnings
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-red-200 rounded-lg p-4">
+      <div class="flex items-center">
+        <div class="rounded-full bg-danger opacity-25 p-2">
+          <i class="lnr lnr-graduation-hat text-white"></i>
+        </div>
+        <div class="ml-4">
+          <h3 class="text-lg font-medium">Cantidad de solicitudes aceptadas:</h3>
+          <p class="text-xl font-semibold">{{count.Aceptadas}}</p>
+          <p class="text-info">
+            Grow Rate:
+            <i class="fa fa-angle-down"></i>
+            <span class="pl-1">14.1%</span>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-green-200 rounded-lg p-4">
+      <div class="flex items-center">
+        <div class="rounded-full bg-success opacity-25 p-2">
+          <i class="lnr lnr-apartment text-white"></i>
+        </div>
+        <div class="ml-4">
+          <h3 class="text-lg font-medium">Cantidad de solicitudes Rechazadas: </h3>
+          <p class="text-xl font-semibold text-green-700">{{count.Rechazadas}}</p>
+          <p class="text-warning">
+            Increased by
+            <i class="fa fa-angle-up"></i>
+            <span class="pl-1">7.35%</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="px-4">
+    <span class="ml-2 text-Strong"><strong>Solicitudes totales:</strong> {{count.Total}}</span>
+  </div>
+
+  <div class="text-center py-3">
+    <button class="btn btn-primary rounded-full py-1 px-3">
+      <span class="mr-2">
+        <i class="icon icon-anim-pulse ion-ios-analytics-outline"></i>
+      </span>
+      <span class="mr-1">View Complete Report</span>
+    </button>
+
+  </div>
+</div>

@@ -5,7 +5,7 @@ const { auth, logout, guardarNuevoUsuario } = require("../controllers/LoginContr
 const { getSolicitudes, DeleteSolicitud, RevisarSolicitud } = require('../controllers/SolicitudesController');
 const { getUsuarios, DeleteUsuario, EditUsuarios, GuardarRol } = require('../controllers/UsersListController');
 const { SaveSolicited, getSolicitudThisUser } = require('../controllers/newSolicitudController');
-const { CallDataset } = require('../controllers/CallDataDashboard.js');
+const { obtenerCantidadSolicitudes } = require('../controllers/CallDataDashboard.js');
 //#region Rutas para visitantes
 router.get('/', (req, res) => {
   if (req.session.loggedin) {
@@ -117,10 +117,18 @@ router.get('/RevisarSolicitud/:id', checkRole([1]), RevisarSolicitud);//REVISAR 
 
 //------------------------- Vistas de ADMIN y Directiva -------------------------
 
-router.get('/dashboard', checkRole([1, 2, 3]), (req, res) => {
-  res.render('public/dashboard', { 
-    layout: 'layouts/navbar'
+router.get('/dashboard', checkRole([1, 2, 3]), async (req, res) => {
+  const count = await obtenerCantidadSolicitudes();
+  res.render('public/dashboard', {
+    layout: 'layouts/navbar',
+      session: req.session.loggedin,
+      rolsesion1: 1 === req.session.user['ID_Rol'],
+      rolsesion2: 2 === req.session.user['ID_Rol'],
+      rolsesion3: 3 === req.session.user['ID_Rol'],
+      rolsesion4: 4 === req.session.user['ID_Rol'],
+      count: count
   });
+  // console.log(count);
 });
 
 //------------------------- Vistas de Alumno y ADMIN -------------------------
