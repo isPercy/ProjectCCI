@@ -87,7 +87,7 @@ router.get('/usuarios', checkRole([1]), async (req, res) => {
   }
 });
 
-router.get('/solicitudes', checkRole([1]), async (req, res) => {
+router.get('/solicitudes', checkRole([1, 2, 3]), async (req, res) => {
   // Lógica de la ruta para el rol de administrador
   try{
     const solicitudes = await getSolicitudes(req);
@@ -112,8 +112,8 @@ router.get('/EditarUsuario/:id', checkRole([1]) , EditUsuarios);//EDIT Usuario
 router.get('/EliminarUsuario/:id', checkRole([1]), DeleteUsuario);//DELETE Usuario
 router.post('/SaveEdit/:id', checkRole([1]), GuardarRol);//UPDATE Rol de Usuario
 
-router.get('/EliminarSolicitud/:id', checkRole([1]), DeleteSolicitud);//DELETE Solicitud
-router.get('/RevisarSolicitud/:id', checkRole([1]), RevisarSolicitud);//REVISAR Solicitud
+router.get('/EliminarSolicitud/:id', checkRole([1, 2, 3]), DeleteSolicitud);//DELETE Solicitud
+router.get('/RevisarSolicitud/:id', checkRole([1, 2, 3]), RevisarSolicitud);//REVISAR Solicitud
 
 //------------------------- Vistas de ADMIN y Directiva -------------------------
 
