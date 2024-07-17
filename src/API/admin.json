@@ -1,0 +1,17 @@
+{    "admin": 
+    [
+        {
+            "id": "1",
+            "nombre": "Operator",
+            "email": "admin@admin.com",
+            "solicitudes":
+            [
+                {
+                    "id": "7",
+                    "fecha": "2023-10-07",
+                    "estado": "pendiente"
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,81 @@
+{
+    "usuarios":
+    [
+        {
+            "id": "1",
+            "nombre": "Javier",
+            "apellidos": "Perez",
+            "email": "javier@gmail.com",
+            "solicitudes":
+            [
+                {
+                    "id": "1",
+                    "fecha": "2023-10-01",
+                    "estado": "pendiente"
+                },
+                {
+                    "id": "2",
+                    "fecha": "2023-10-02",
+                    "estado": "aceptada"
+                },
+                {
+                    "id": "8",
+                    "fecha": "2023-10-08",
+                    "estado": "rechazada"
+                },
+                {
+                    "id": "9",
+                    "fecha": "2023-10-09",
+                    "estado": "pendiente"
+                }
+            ]
+        },
+        {
+            "id": "2",
+            "nombre": "Pedro",
+            "apellidos": "Garcia",
+            "email": "pedro@gmail.com",
+            "solicitudes":
+            [
+                {
+                    "id": "3",
+                    "fecha": "2023-10-03",
+                    "estado": "pendiente"
+                },
+                {
+                    "id": "4",
+                    "fecha": "2023-10-04",
+                    "estado": "rechazada"
+                }
+            ]
+        },
+        {
+            "id": "3",
+            "nombre": "Maria",
+            "apellidos": "Lopez",
+            "email": "maria@gmail.com",
+            "solicitudes":
+            [
+                {
+                    "id": "5",
+                    "fecha": "2023-10-05",
+                    "estado": "pendiente"
+                }
+            ]
+        },
+        {
+            "id": "4",
+            "nombre": "Luis",
+            "apellidos": "Gonzalez",
+            "email": "luis@gmail.com",
+            "solicitudes":
+            [
+                {
+                    "id": "6",
+                    "fecha": "2023-10-06",
+                    "estado": "pendiente"
+                }
+            ]
+        }
+    ]
+}
